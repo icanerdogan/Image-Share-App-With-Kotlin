@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "89050819035",
+    "project_id": "imageshareapp-17a8f",
+    "storage_bucket": "imageshareapp-17a8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89050819035:android:d85fb046f8a544e8641ffe",
+        "android_client_info": {
+          "package_name": "com.example.imageshareappwithfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvcbd-R6UMS_kPLt7K2sMItPsHydn_x1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
