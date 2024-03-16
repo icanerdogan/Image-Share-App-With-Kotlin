@@ -1,11 +1,18 @@
-package com.example.imageshareappwithfirebase
+package com.example.imageshareappwithfirebase.view
+
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.imageshareappwithfirebase.R
+import com.example.imageshareappwithfirebase.adapter.FeedRecyclerAdapter
+import com.example.imageshareappwithfirebase.model.Post
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -14,6 +21,9 @@ class FeedActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var storage: FirebaseFirestore
+    private lateinit var recyclerViewAdapter: FeedRecyclerAdapter
+
+    var postList = ArrayList<Post>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -24,6 +34,10 @@ class FeedActivity : AppCompatActivity() {
         storage = FirebaseFirestore.getInstance()
 
         getDatas()
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = FeedRecyclerAdapter(postList)
     }
 
     fun getDatas() {
@@ -37,15 +51,21 @@ class FeedActivity : AppCompatActivity() {
 
             if (snapshot != null && !snapshot.isEmpty) {
 
+                postList.clear()
+
                 val documents = snapshot.documents
                 for (document in documents) {
+
                     val userEmail = document.get("userEmail") as String
                     val imageUrl = document.get("imageUrl") as String
                     val userComment = document.get("userComment") as String
 
+                    val downloadPost = Post(userEmail, imageUrl, userComment)
+                    postList.add(downloadPost)
 
                 }
 
+                recyclerViewAdapter.notifyDataSetChanged()
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.imageshareappwithfirebase
+package com.example.imageshareappwithfirebase.view
 
 import android.Manifest
 import android.app.Activity
@@ -12,18 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.imageshareappwithfirebase.databinding.ActivityImageShareBinding
-import com.example.imageshareappwithfirebase.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import java.net.URI
-import java.sql.Timestamp
 import java.util.UUID
 
 class ImageShareActivity : AppCompatActivity() {
