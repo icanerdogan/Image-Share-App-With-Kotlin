@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class FeedActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var storage: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -17,6 +21,33 @@ class FeedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feed)
 
         auth = FirebaseAuth.getInstance()
+        storage = FirebaseFirestore.getInstance()
+
+        getDatas()
+    }
+
+    fun getDatas() {
+
+        storage.collection("ImageColletion")
+            .orderBy("date", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                Toast.makeText(this, error.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+
+            if (snapshot != null && !snapshot.isEmpty) {
+
+                val documents = snapshot.documents
+                for (document in documents) {
+                    val userEmail = document.get("userEmail") as String
+                    val imageUrl = document.get("imageUrl") as String
+                    val userComment = document.get("userComment") as String
+
+
+                }
+
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

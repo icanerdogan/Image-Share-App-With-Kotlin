@@ -67,10 +67,10 @@ class ImageShareActivity : AppCompatActivity() {
 
                     // database
                     val postMapHash = hashMapOf<String, Any>()
-                    postMapHash.put("imageUrl", downloadUrl)
-                    postMapHash.put("userEmail", currentUserEmail)
-                    postMapHash.put("userComment", userComment)
-                    postMapHash.put("date", date)
+                    postMapHash["imageUrl"] = downloadUrl
+                    postMapHash["userEmail"] = currentUserEmail
+                    postMapHash["userComment"] = userComment
+                    postMapHash["date"] = date
 
                     database.collection("ImageCollection").add(postMapHash).addOnCompleteListener {
                         if (it.isSuccessful){
