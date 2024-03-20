@@ -57,5 +57,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage")
 
-
+    // it's necessary for download image and caching
+    implementation("com.squareup.picasso:picasso:2.8")
 }
