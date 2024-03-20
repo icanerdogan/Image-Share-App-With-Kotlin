@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.imageshareappwithfirebase.R
 import com.example.imageshareappwithfirebase.model.Post
 
-class FeedRecyclerAdapter(val postList: ArrayList<Post>): RecyclerView.Adapter<FeedRecyclerAdapter.PostHolder>() {
 
+class FeedRecyclerAdapter(val postList: ArrayList<Post>): RecyclerView.Adapter<FeedRecyclerAdapter.PostHolder>() {
     class  PostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var userEmailTextView: TextView = itemView.findViewById(R.id.recyclerRowEmail)
+        var userCommentTextView: TextView = itemView.findViewById(R.id.recyclerRowComment)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
@@ -28,7 +30,8 @@ class FeedRecyclerAdapter(val postList: ArrayList<Post>): RecyclerView.Adapter<F
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
 
-        holder.itemView.findViewById<TextView>(R.id.recyclerRowEmail).text = postList[position].userEmail
-        holder.itemView.findViewById<TextView>(R.id.recyclerRowComment).text = postList[position].userComment
+        holder.userEmailTextView.text = postList[position].userEmail
+        holder.userCommentTextView.text = postList[position].userComment
+
     }
 }
