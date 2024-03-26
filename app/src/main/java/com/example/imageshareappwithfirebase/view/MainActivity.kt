@@ -1,12 +1,22 @@
 package com.example.imageshareappwithfirebase.view
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.imageshareappwithfirebase.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
     }
 
     fun girisYap(view: View){
@@ -48,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, FeedActivity::class.java)
                 startActivity(intent)
                 finish()
+
             }
         }.addOnFailureListener { excaption ->
             Toast.makeText(this, excaption.localizedMessage, Toast.LENGTH_LONG).show()

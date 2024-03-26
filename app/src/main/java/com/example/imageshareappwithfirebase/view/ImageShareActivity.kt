@@ -2,10 +2,15 @@ package com.example.imageshareappwithfirebase.view
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.health.connect.datatypes.ExerciseRoute
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +40,7 @@ class ImageShareActivity : AppCompatActivity() {
         binding = ActivityImageShareBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
@@ -52,6 +58,10 @@ class ImageShareActivity : AppCompatActivity() {
         val imageReference = referance.child("images").child(imageName)
 
         if (selectedImage != null) {
+            // start maps activity for take user current adress
+            val intent = Intent(this@ImageShareActivity, MapsActivity::class.java)
+            startActivity(intent)
+
             imageReference.putFile(selectedImage!!).addOnSuccessListener {
                 val uploadedImageReference = FirebaseStorage.getInstance().reference.child("images").child(imageName)
                 uploadedImageReference.downloadUrl.addOnCompleteListener {
@@ -59,12 +69,14 @@ class ImageShareActivity : AppCompatActivity() {
                     val currentUserEmail = auth.currentUser!!.email.toString()
                     val userComment = binding.commentPT.text.toString()
                     val date = com.google.firebase.Timestamp.now()
+                    val userAddress = intent.getStringExtra("address").toString()
 
                     // database
                     val postMapHash = hashMapOf<String, Any>()
                     postMapHash["imageUrl"] = downloadUrl
                     postMapHash["userEmail"] = currentUserEmail
                     postMapHash["userComment"] = userComment
+                    postMapHash["userAddress"] = userAddress
                     postMapHash["date"] = date
 
                     database.collection("ImageCollection").add(postMapHash).addOnCompleteListener {
