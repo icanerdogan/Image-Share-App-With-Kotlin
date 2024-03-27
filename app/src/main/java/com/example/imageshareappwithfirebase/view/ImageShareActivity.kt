@@ -34,6 +34,7 @@ class ImageShareActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
+    private var userAddress : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,25 +59,22 @@ class ImageShareActivity : AppCompatActivity() {
         val imageReference = referance.child("images").child(imageName)
 
         if (selectedImage != null) {
-            // start maps activity for take user current adress
-            val intent = Intent(this@ImageShareActivity, MapsActivity::class.java)
-            startActivity(intent)
 
-            imageReference.putFile(selectedImage!!).addOnSuccessListener {
+            imageReference.putFile(selectedImage!!)
+                .addOnSuccessListener {
                 val uploadedImageReference = FirebaseStorage.getInstance().reference.child("images").child(imageName)
                 uploadedImageReference.downloadUrl.addOnCompleteListener {
                     val downloadUrl = it.result.toString()
                     val currentUserEmail = auth.currentUser!!.email.toString()
                     val userComment = binding.commentPT.text.toString()
                     val date = com.google.firebase.Timestamp.now()
-                    val userAddress = intent.getStringExtra("address").toString()
 
                     // database
                     val postMapHash = hashMapOf<String, Any>()
                     postMapHash["imageUrl"] = downloadUrl
                     postMapHash["userEmail"] = currentUserEmail
                     postMapHash["userComment"] = userComment
-                    postMapHash["userAddress"] = userAddress
+                    postMapHash["userAddress"] = userAddress.toString()
                     postMapHash["date"] = date
 
                     database.collection("ImageCollection").add(postMapHash).addOnCompleteListener {
@@ -135,16 +133,27 @@ class ImageShareActivity : AppCompatActivity() {
                     val source = ImageDecoder.createSource(this.contentResolver, selectedImage!!)
                     selectedBitMap = ImageDecoder.decodeBitmap(source)
                     binding.imageView.setImageBitmap(selectedBitMap)
-
                 } else{
                     selectedBitMap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
                     binding.imageView.setImageBitmap(selectedBitMap)
                 }
 
-
+                // Start MapsActivity to get the address
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivityForResult(intent, 3)
+            }
+        }else if(requestCode == 3 && resultCode == Activity.RESULT_OK && data != null) {
+            // Get address from MapsActivity result
+            val address = data.getStringExtra("address")
+            if (address != null) {
+                // Now you have the address, proceed with sharing
+                userAddress = address
+            } else {
+                Toast.makeText(this, "Adres alınamadı", Toast.LENGTH_LONG).show()
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+
 }

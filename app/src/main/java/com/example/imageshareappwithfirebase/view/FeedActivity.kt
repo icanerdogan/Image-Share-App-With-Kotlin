@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imageshareappwithfirebase.R
@@ -65,8 +66,9 @@ class FeedActivity : AppCompatActivity() {
                         val userEmail = document.get("userEmail") as String
                         val userComment = document.get("userComment") as String
                         val imageUrl = document.get("imageUrl") as String
+                        val userAddress = document.get("userAddress") as String
 
-                        val downloadedPost = Post(userEmail, imageUrl, userComment)
+                        val downloadedPost = Post(userEmail, imageUrl, userComment, userAddress)
                         postList.add(downloadedPost)
                     }
 

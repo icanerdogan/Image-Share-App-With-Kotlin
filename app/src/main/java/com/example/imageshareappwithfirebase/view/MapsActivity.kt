@@ -1,6 +1,7 @@
 package com.example.imageshareappwithfirebase.view
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -56,13 +57,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val currentAddressList = geocoder.getFromLocation(location.latitude, location.longitude, 1)
                     if ((currentAddressList != null) && (currentAddressList.size > 0)) {
                         val address = currentAddressList[0].getAddressLine(0)
-
-                        // send address to image share activity
-                        val intent = Intent(this@MapsActivity, FeedActivity::class.java)
+                        val intent = Intent()
                         intent.putExtra("address", address)
-                        startActivity(intent)
+                        setResult(Activity.RESULT_OK, intent)
+                        finish()
                     }else {
                         Toast.makeText(this@MapsActivity, "Adres alınamadı", Toast.LENGTH_LONG).show()
+                        finish()
                     }
                 }catch (e: Exception) {
                     e.printStackTrace()
@@ -97,4 +98,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
+
 }

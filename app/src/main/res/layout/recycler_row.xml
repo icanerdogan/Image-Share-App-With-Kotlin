@@ -7,10 +7,10 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/recyclerRowEmail"
+        android:id="@+id/recyclerRowAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="User Email Adress"
+        android:layout_height="48dp"
+        android:text="User Current Adress"
         android:layout_margin="5dp"
         android:textSize="20sp"
         android:textColor="#3F51B5"/>
