@@ -4,12 +4,10 @@ package com.example.imageshareappwithfirebase.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imageshareappwithfirebase.R
+import com.example.imageshareappwithfirebase.adapter.CategoryAdapter
 import com.example.imageshareappwithfirebase.adapter.FeedRecyclerAdapter
 import com.example.imageshareappwithfirebase.databinding.ActivityFeedBinding
 import com.example.imageshareappwithfirebase.model.Post
@@ -44,67 +42,91 @@ class FeedActivity : AppCompatActivity() {
         recyclerViewAdapter = FeedRecyclerAdapter(postList)
         binding.recyclerView.adapter = recyclerViewAdapter
 
-    }
+        // Kategori listesini al
+        val categoryList = resources.getStringArray(R.array.category_list).toList()
 
-    fun getDatas() {
+        // Kategori adapter'ını oluştur
+        val categoryAdapter = CategoryAdapter(categoryList)
+        binding.categoriesRV.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.categoriesRV.adapter = categoryAdapter
 
-        database.collection("ImageCollection")
-            .orderBy("date", Query.Direction.DESCENDING)
-            .addSnapshotListener { value, error ->
+        binding.homeTV.setOnClickListener {
+            val intent = Intent(this, FeedActivity::class.java)
+            startActivity(intent)
+        }
 
-                if (error != null) {
-                    Toast.makeText(this, error.localizedMessage, Toast.LENGTH_LONG).show()
-                }
-
-                if (value != null && !value.isEmpty) {
-
-                    val documents = value.documents
-
-                    postList.clear()
-
-                    for (document in documents) {
-                        val userEmail = document.get("userEmail") as String
-                        val userComment = document.get("userComment") as String
-                        val imageUrl = document.get("imageUrl") as String
-                        val userAddress = document.get("userAddress") as String
-
-                        val downloadedPost = Post(userEmail, imageUrl, userComment, userAddress)
-                        postList.add(downloadedPost)
-                    }
-
-                    recyclerViewAdapter.notifyDataSetChanged()
-
-                }
-
-            }
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
-        val menuInflater = menuInflater
-        menuInflater.inflate(R.menu.options_menu, menu)
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if (item.itemId == R.id.shareImage) {
-
-            // going to activity of image share
+        binding.shareImage.setOnClickListener {
             val intent = Intent(this, ImageShareActivity::class.java)
             startActivity(intent)
+        }
 
-        } else if (item.itemId == R.id.logOut) {
-
+        binding.logOut.setOnClickListener {
             auth.signOut()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-
         }
 
-        return super.onOptionsItemSelected(item)
+    }
+
+    fun getDatas() {
+        //val userCity = "Ankara"
+        val currentUser = auth.currentUser
+        val imageCollection = database.collection("ImageCollection")
+        val userCollection = database.collection("Users")
+
+        if (currentUser != null) {
+            userCollection
+                .document(currentUser.uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val userCity = document.getString("city")
+                        if (userCity != null) {
+                            imageCollection
+                                .whereEqualTo("userCityName", userCity)
+                                .orderBy("productPrice", Query.Direction.ASCENDING)
+                                .addSnapshotListener { value, error ->
+                                    if (error != null) {
+                                        Toast.makeText(this, error.localizedMessage, Toast.LENGTH_LONG).show()
+                                    }
+
+                                    if (value != null && !value.isEmpty) {
+                                        val documents = value.documents
+
+                                        postList.clear()
+
+                                        for (document in documents) {
+                                            val userEmail = document.getString("userEmail") ?: ""
+                                            val userComment = document.getString("userComment") ?: ""
+                                            val imageUrl = document.getString("imageUrl") ?: ""
+                                            val userAddress = document.getString("userAddress") ?: ""
+
+                                            val downloadedPost = Post(userEmail, imageUrl, userComment, userAddress)
+                                            postList.add(downloadedPost)
+                                        }
+
+                                        recyclerViewAdapter.notifyDataSetChanged()
+
+                                    }
+
+                                }
+                        } else {
+                            Toast.makeText(this, "User city not found", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        Toast.makeText(this, "User document does not exist", Toast.LENGTH_LONG).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
+                }
+        } else {
+            Toast.makeText(this, "No user signed in", Toast.LENGTH_LONG).show()
+        }
+
     }
 }
+
+

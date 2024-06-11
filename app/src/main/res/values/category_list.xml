@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_list">
+        <item>Meyve, Sebze</item>
+        <item>Et, Tavuk, Balık</item>
+        <item>Süt, Kahvaltılık</item>
+        <item>Temel Gıda</item>
+        <item>Meze, Hazır Yemek, Donuk</item>
+        <item>İçecek</item>
+        <item>Dondurma</item>
+        <item>Atıştırmalık</item>
+        <item>Fırın, Pastane</item>
+        <item>Deterjan, Temizlik</item>
+        <item>Kişisel Bakım, Kozmetik, Sağlık</item>
+        <item>Bebek</item>
+        <item>Ev, Yaşam</item>
+        <item>Kitap, Kırtasiye</item>
+        <item>Çicek</item>
+        <item>Pet Shop</item>
+        <item>Elektronik</item>
+    </string-array>
+</resources>

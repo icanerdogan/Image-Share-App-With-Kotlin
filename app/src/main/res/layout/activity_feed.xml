@@ -1,24 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.FeedActivity">
+
+    <TextView
+        android:id="@+id/categoryList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category List"
+        android:fontFamily="@font/poppins_thin"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoriesRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_weight="1" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.2"
+        android:background="@drawable/rectangle_for_entery_buttoms">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/homeTV"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="0.2"
+            android:background="@color/transparent"
+            android:drawableStart="@drawable/home_icon" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/shareImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/upload_product"
+            android:layout_weight="0.29"
+            android:background="@color/transparent"
+            android:layout_margin="5dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/logOut"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/logout"
+            android:layout_weight="0.16"
+            android:background="@color/transparent"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

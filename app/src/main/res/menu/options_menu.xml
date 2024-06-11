@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/shareImage" android:title="Fotoğraf Paylaş" />
-    <item android:id="@+id/logOut" android:title="Çıkış Yap" />
+    <item android:id="@+id/shareImage" android:title="Share Image" />
+    <item android:id="@+id/logOut" android:title="Log Out" />
 
 </menu>

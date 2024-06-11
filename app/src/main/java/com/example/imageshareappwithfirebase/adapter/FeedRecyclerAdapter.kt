@@ -14,7 +14,7 @@ import com.example.imageshareappwithfirebase.model.Post
 import com.squareup.picasso.Picasso
 
 
-class FeedRecyclerAdapter(val postList: ArrayList<Post>): RecyclerView.Adapter<FeedRecyclerAdapter.PostHolder>() {
+class FeedRecyclerAdapter(var postList: ArrayList<Post>): RecyclerView.Adapter<FeedRecyclerAdapter.PostHolder>() {
     class  PostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var userAddress: TextView = itemView.findViewById(R.id.recyclerRowAddress)
         var userCommentTextView: TextView = itemView.findViewById(R.id.recyclerRowComment)
@@ -36,7 +36,7 @@ class FeedRecyclerAdapter(val postList: ArrayList<Post>): RecyclerView.Adapter<F
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
 
-        holder.userAddress.text = "Market'e Gitmek İçin Yol Tarifi Al"//postList[position].userAddress
+        holder.userAddress.text = "Get Direction"//postList[position].userAddress
         holder.userCommentTextView.text = postList[position].userComment
         Picasso.get().load(postList[position].imageUrl).into(holder.imageUrlImageView)
 
@@ -59,6 +59,8 @@ class FeedRecyclerAdapter(val postList: ArrayList<Post>): RecyclerView.Adapter<F
             }
         }
     }
+
+
 
 
 }

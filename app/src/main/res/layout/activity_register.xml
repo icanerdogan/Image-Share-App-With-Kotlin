@@ -1,93 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.MainActivity">
+    android:orientation="vertical">
 
-
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/ellipse_1"
         android:layout_width="393dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/ellipse1" />
+        android:background="@drawable/ellipse1"
+        android:layout_gravity="center"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Back"
+        android:text="Register"
         android:textSize="30dp"
-        android:fontFamily="@font/poppins_thin"
-        android:paddingStart="80dp" />
+        android:textStyle="bold"
+        android:layout_marginTop="-60dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_thin"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login to your account"
-        android:textSize="18dp"
-        android:fontFamily="@font/poppins_light"
-        android:paddingStart="100dp" />
+        android:text="Create your new account"
+        android:textSize="16sp"
+        android:layout_marginTop="-10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_light" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/emailText"
+        android:id="@+id/nameET"
         android:layout_width="300dp"
+        android:inputType="text"
         android:layout_height="46dp"
-        android:layout_marginStart="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rectangle_for_entery_buttoms"
         android:padding="10dp"
-        android:hint="Enter email or phone" />
+        android:hint="Name" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/passwordText"
+        android:id="@+id/emailET"
+        android:inputType="textEmailAddress"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle_for_entery_buttoms"
+        android:padding="10dp"
+        android:hint="E-mail" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinnerCity"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle_for_entery_buttoms"
+        android:padding="10dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/passwordEt"
         android:inputType="textPassword"
         android:layout_width="300dp"
         android:layout_height="46dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
         android:background="@drawable/rectangle_for_entery_buttoms"
         android:padding="10dp"
         android:hint="Password" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/rememberMeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_light"
-            android:text="Remember me"
-            android:textSize="11dp"/>
-
-        <TextView
-            android:id="@+id/forgetPasswordTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Forgat Password ?"
-            android:fontFamily="@font/poppins_light"
-            android:textSize="11dp"
-            android:layout_marginLeft="80dp"
-            android:textColor="@color/green" />
-
-    </LinearLayout>
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/signUp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_background"
         android:fontFamily="@font/poppins_thin"
-        android:onClick="girisYap"
-        android:text="Log In"
+        android:onClick="registerUser"
+        android:text="Sign Up"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
@@ -95,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="50dp">
+        android:layout_gravity="center">
 
         <ImageView
             android:layout_width="110dp"
@@ -124,14 +119,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/googleSingIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/google_icons"
-            android:layout_marginStart="135dp"/>
+            android:src="@drawable/google_icons"/>
 
         <ImageView
             android:id="@+id/facebookSingIn"
@@ -147,30 +142,27 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dontHaveAccountTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:text="Don't have an Account ?"
+            android:text="Already have an Account?"
             android:fontFamily="@font/poppins_light"
             android:textSize="12dp" />
 
-        <TextView
-            android:id="@+id/createAccountTV"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/logInTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:text="Create Account"
+            android:text="  Log In"
             android:clickable="true"
             android:fontFamily="@font/poppins_thin"
             android:textColor="@color/green"
             android:textSize="12dp" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>

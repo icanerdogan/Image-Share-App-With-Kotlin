@@ -57,8 +57,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val currentAddressList = geocoder.getFromLocation(location.latitude, location.longitude, 1)
                     if ((currentAddressList != null) && (currentAddressList.size > 0)) {
                         val address = currentAddressList[0].getAddressLine(0)
+                        val cityName = currentAddressList[0].adminArea
                         val intent = Intent()
                         intent.putExtra("address", address)
+                        intent.putExtra("cityName", cityName)
                         setResult(Activity.RESULT_OK, intent)
                         finish()
                     }else {

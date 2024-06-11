@@ -65,6 +65,8 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -75,5 +77,18 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage")
     implementation("com.squareup.picasso:picasso:2.8")
+
+    /// Add these dependencies for direction login ///
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
+
+    //// ML-KIT ////
+    implementation("com.google.mlkit:text-recognition:16.0.0")
+
+    //// viewModels ////
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
+
+    /// OpenCV ///
+    implementation("org.opencv:opencv-android:4.5.3")
+
 
 }

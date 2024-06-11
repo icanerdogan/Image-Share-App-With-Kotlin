@@ -12,7 +12,20 @@
           "package_name": "com.example.imageshareappwithfirebase"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "89050819035-eqkj8oga90c607eakspsoia4j0i52mqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.imageshareappwithfirebase",
+            "certificate_hash": "2cfaea309a80cd0cb58034deeb76504a2fa3b56a"
+          }
+        },
+        {
+          "client_id": "89050819035-btnbj2bol4r8e35fg9uv0q030d18dv8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAvcbd-R6UMS_kPLt7K2sMItPsHydn_x1s"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89050819035-0jhsat5dlbn4e9utkdpbth05tl97m00e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
